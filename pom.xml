@@ -2,17 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
  
-    <parent>
-		<groupId>sc.fiji</groupId>
-		<artifactId>pom-fiji</artifactId>
-		<version>17.0.0</version>
+	<parent>
+		<groupId>org.scijava</groupId>
+		<artifactId>pom-scijava</artifactId>
+		<version>17.1.1</version>
 		<relativePath />
-	</parent>
+	</parent> 
  
     <artifactId>SpermQ_</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.2.1-SNAPSHOT</version>
  	<groupId>JNH</groupId>
- 
+ 	<description>An ImageJ plugin to analyze the flagellar beat of sperm and sperm steering. Copyright (C) 2017-2020: Jan N. Hansen, Sebastian Rassmann, Jan F. Jikeli, and Dagmar Wachten; research group Biophysical Imaging, Institute of Innate Immunity, Bonn, Germany (http://www.iii.uni-bonn.de/en/wachten_lab/). Funding: DFG priority program SPP 1726 &quot;Microswimmers&quot;. This software is part of the following publication: https://www.mdpi.com/2073-4409/8/1/10.</description>
+ 	
 <!-- Plugin Information -->
  	<url>https://github.com/hansenjn/</url>
 	<inceptionYear>2016</inceptionYear>
@@ -20,7 +21,6 @@
 		<name>JNH</name>
 		<url>https://github.com/hansenjn</url>
 	</organization>
-<!-- TODO: Fill out these sections -->
 
     <name>SpermQ</name>
  
@@ -179,5 +179,4 @@
 
 		</plugins>
 	</build>     
-    <description>An ImageJ plugin to analyze the flagellar beat of sperm and sperm steering. Copyright (C) 2017-2020: Jan N. Hansen, Sebastian Rassmann, Jan F. Jikeli, and Dagmar Wachten; research group Biophysical Imaging, Institute of Innate Immunity, Bonn, Germany (http://www.iii.uni-bonn.de/en/wachten_lab/). Funding: DFG priority program SPP 1726 &quot;Microswimmers&quot;. This software is part of the following publication: https://www.mdpi.com/2073-4409/8/1/10.</description>
 </project>
