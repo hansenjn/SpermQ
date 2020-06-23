@@ -501,6 +501,9 @@ public class main implements PlugIn, Measurements{
 		//Initialize
 		ImagePlus imp;		
 		String homePath = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath();
+		if(System.getProperty("os.name").toUpperCase().contains("MAC")){
+			homePath += System.getProperty("file.separator") + "Desktop";
+		}
 		
 		//get head selections
 		Roi [] selections = new Roi [tasks];
