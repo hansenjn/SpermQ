@@ -14,6 +14,14 @@
  	<groupId>JNH</groupId>
  	<description>An ImageJ plugin to analyze the flagellar beat of sperm and sperm steering. Copyright (C) 2017-2020: Jan N. Hansen, Sebastian Rassmann, Jan F. Jikeli, and Dagmar Wachten; research group Biophysical Imaging, Institute of Innate Immunity, Bonn, Germany (http://www.iii.uni-bonn.de/en/wachten_lab/). Funding: DFG priority program SPP 1726 &quot;Microswimmers&quot;. This software is part of the following publication: https://www.mdpi.com/2073-4409/8/1/10.</description>
  	
+ 	<properties>
+		<main-class>main</main-class>
+		<package-name>spermQ</package-name>
+		<license.licenseName>gpl_v3</license.licenseName>
+		<license.copyrightOwners>Jan Niklas Hansen.</license.copyrightOwners>
+		<license.projectName>SpermQ_JNH</license.projectName>
+ 	</properties>
+ 	
 <!-- Plugin Information -->
  	<url>https://github.com/hansenjn/</url>
 	<inceptionYear>2016</inceptionYear>
@@ -21,8 +29,15 @@
 		<name>JNH</name>
 		<url>https://github.com/hansenjn</url>
 	</organization>
-
     <name>SpermQ</name>
+    	
+	<licenses>
+		<license>
+			<name>GNU General Public License v3+</name>
+			<url>http://www.gnu.org/licenses/gpl.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
  
     <developers>
         <developer>
@@ -94,10 +109,6 @@
 		<system>None</system>
 	</ciManagement>
  
- 	<properties>
-		<main-class>main</main-class>
-	</properties>
- 
  	 <repositories>
         <!-- NB: for project parent, in case of partial checkout -->
         <repository>
@@ -113,37 +124,6 @@
             <groupId>net.imagej</groupId>
             <artifactId>ij</artifactId>
         </dependency>
- 		        
- 		<!-- Test dependencies -->
-<!--         <dependency> -->
-<!--             <groupId>junit</groupId> -->
-<!--             <artifactId>junit</artifactId> -->
-<!--             <scope>test</scope> -->
-<!--         </dependency> -->
-        
-        <!-- User-facing commands -->
-<!-- 		<dependency> -->
-<!-- 		    <groupId>net.imagej</groupId> -->
-<!-- 		    <artifactId>imagej-plugins-commands</artifactId> -->
-<!-- 		</dependency> -->
-		 
-		<!-- Run graphically with the classic (ImageJ 1.x) user interface -->
-<!-- 		<dependency> -->
-<!-- 		    <groupId>net.imagej</groupId> -->
-<!-- 		    <artifactId>imagej-legacy</artifactId> -->
-<!-- 		</dependency> -->
-		 
-		<!-- Run graphically with the ImageJ2 user interface-->
-<!-- 		<dependency> -->
-<!-- 		    <groupId>net.imagej</groupId> -->
-<!-- 		    <artifactId>imagej-ui-swing</artifactId> -->
-<!-- 		</dependency> -->
-		
-		<!-- FIJI dependencies -->
-<!--  		<dependency> -->
-<!-- 	    	<groupId>sc.fiji</groupId> -->
-<!-- 	    	<artifactId>fiji-lib</artifactId> -->
-<!-- 		</dependency> -->
     </dependencies>  
     
     <build>
@@ -175,8 +155,6 @@
 					</archive>
 				</configuration>
 			</plugin>
-			
-
 		</plugins>
 	</build>     
 </project>
