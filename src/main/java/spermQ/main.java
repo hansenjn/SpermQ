@@ -1,6 +1,6 @@
 /***===============================================================================
  
- SpermQ_.java Version 20190926
+ SpermQ_.java Version v0.2.1
 
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  
  See the GNU General Public License for more details.
  
- Copyright (C) 2016 - 2019: Jan N Hansen and Jan F Jikeli
+ Copyright (C) 2016 - 2020: Jan N Hansen and Jan F Jikeli
    
  For any questions please feel free to contact me (jan.hansen@uni-bonn.de).
 
@@ -39,7 +39,7 @@ import spermQ.jnh.support.*;
 public class main implements PlugIn, Measurements{
 	//Name
 		static final String PLUGINNAME = "SpermQ_";
-		static final String PLUGINVERSION = "v0.2.0";
+		static final String PLUGINVERSION = "v0.2.1";
 		static final double threshold = 0.70;
 		
 	//default settings loader
@@ -102,7 +102,7 @@ public class main implements PlugIn, Measurements{
 		Load Default Settings
 		&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 		
-		GenericDialog gdDSL = new GenericDialog("SpermTracker_ Default Settings Loader");		
+		GenericDialog gdDSL = new GenericDialog("SpermQ Default Settings Loader");		
 		gdDSL.setInsets(0,0,0);	gdDSL.addMessage(PLUGINNAME + ", version " + PLUGINVERSION + " (\u00a9 2013-" + constants.dateY.format(new Date()) + ", JN Hansen \u0026 JF Jikeli)", constants.Head1);
 		gdDSL.setInsets(10,0,0);	gdDSL.addMessage("Default Settings Loader ", constants.Head2);
 		gdDSL.setInsets(10,0,0);	gdDSL.addMessage("Experimental setup ", constants.BoldTxt);
@@ -460,7 +460,8 @@ public class main implements PlugIn, Measurements{
 	        	return;
 	        }
 	    });
-	
+
+		//Waiting for od to be done
 		while(od.done==false){
 			 try{
 				 Thread.currentThread().sleep(50);
