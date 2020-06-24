@@ -10,7 +10,7 @@ This software is part of the following publication:
 Hansen, J.N.; Rassmann, S.; Jikeli, J.F.; Wachten, D. SpermQ–A Simple Analysis Software to Comprehensively Study Flagellar Beating and Sperm Steering. Cells 2019, 8, 10. doi: [10.3390/cells8010010](https://doi.org/10.3390/cells8010010).
 
 ## Citing SpermQ
-Please cite the [SpermQ publication](https://doi.org/10.3390/cells8010010) when presenting / publishing data that were achieved by using SpermQ:
+Please cite the SpermQ publication when presenting / publishing data that were achieved by using SpermQ:
 
 Hansen, J.N.; Rassmann, S.; Jikeli, J.F.; Wachten, D. SpermQ–A Simple Analysis Software to Comprehensively Study Flagellar Beating and Sperm Steering. Cells 2019, 8, 10. doi: [10.3390/cells8010010](https://doi.org/10.3390/cells8010010).
 
