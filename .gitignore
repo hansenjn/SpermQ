@@ -47,3 +47,6 @@ local.properties
 
 # Maven related
 target/*
+
+# Mac related
+.DS_Store*
