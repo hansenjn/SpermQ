@@ -23,19 +23,19 @@ SpermQ processes 2D time-lapse images (supplied as .tif-stacks), in which SpermQ
 However, you may also use (if already recorded or no other microscope available) phase contrast or bright-field microscopy to acquire the images - in this case there will be some additional preprocessing steps necessary before image analysis. Most importantly, make sure that in your recordings multiple sperm do not overlap or come close in the image (eventually dilute the sperm solution). In addition it must be possible to distinguish the sperm cell at all points of the flagellum from the background.
 
 ### System requirements
-SpermQ consists of ImageJ/Fiji plugins and a pure java tool. 
-
-#### Hardware requirements
-ImageJ/Fiji does not require any specific hardware and can also run on low-performing computers. However, a RAM is required that allows to load one image sequence that you aim to analyze into your RAM at least once, ideally twice or multiple times. ImageJ does not require any specific graphics card. The speed of the analysis depends on the processor speed.
-
-#### Operating system
-The ImageJ plugins and Java software were developed and tested on Windows 8.1 and Mac OS X Catalina (Version 10.15.5).
-ImageJ and Java is also available for Linux, where the ImageJ plugins and Java software in theory can be easily run, too.
+SpermQ consists of ImageJ plugins and a pure java tool. 
 
 #### Software requirements
 Performing the analysis pipeline requires the installation of
 - Java™ by Oracle (tested on Version 8, Update 231)
 - [ImageJ](https://imagej.net/Downloads) (tested on versions 1.51r, 1.51u, 1.52i, and 1.53a).
+
+#### Hardware requirements
+ImageJ and java do not require any specific hardware and can also run on low-performing computers. However, a RAM is required that allows to load one image sequence that you aim to analyze into your RAM at least once, ideally twice or multiple times. ImageJ does not require any specific graphics card. The speed of the analysis depends on the processor speed.
+
+#### Operating system
+The ImageJ plugins and Java software were developed and tested on Windows 8.1 and Mac OS X Catalina (Version 10.15.5).
+ImageJ and Java is also available for Linux, where the ImageJ plugins and Java software in theory can be easily run, too.
 
 ## Important LICENSE note
 The newly developed software is licensed under GNU General Public License v3.0. However, this software includes packages derived from others, for which different licenses may apply. The different licenses and the authors of theses code parts are clearly stated in the headers of the respective classes. This applies to the following packages\classes:
