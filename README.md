@@ -17,10 +17,18 @@ Hansen, J.N.; Rassmann, S.; Jikeli, J.F.; Wachten, D. SpermQ–A Simple Analysis
 ## How to use and apply SpermQ?
 A user guide for SpermQ analysis is available [here](https://github.com/hansenjn/SpermQ/blob/master/Manual/SpermQ%20Manual.pdf). For additional help on selecting the optimal SpermQ settings and setting up a good SpermQ analysis pipeline, please contact jan.hansen(at)uni-bonn.de.
 
-### Data requirements and imaging
+### The SpermQ workflow in a nutshell
+#### Imaging
 SpermQ processes 2D time-lapse images (supplied as .tif-stacks), in which SpermQ detects flagella/motile cilia as bright pixels (high intensity values) on dark background pixels (low intensity values), ideally with high contrast. This can be achieved using dark-field or fluorescence microscopy. To analyze mouse or human sperm flagella beating, we recommed to record images with a simple dark-field microscope, a camera (frame rate should be at least 200 fps for mouse, 500 fps for human sperm), a 10x or 16x magnification for mouse or a 20x or 32x magnification for human sperm, a recording time of at least 1 sec (rather 2 sec).
 
 However, you may also use (if already recorded or no other microscope available) phase contrast or bright-field microscopy to acquire the images - in this case there will be some additional preprocessing steps necessary before image analysis. Most importantly, make sure that in your recordings multiple sperm do not overlap or come close in the image (eventually dilute the sperm solution). In addition it must be possible to distinguish the sperm cell at all points of the flagellum from the background.
+
+#### Image analysis
+Image analysis is performed in ImageJ (which is freely accessible, see also System requirements below) using ImageJ plugins. 
+In principle you should consider three steps of the analysis (please read the [User Guide](https://github.com/hansenjn/SpermQ/blob/master/Manual/SpermQ%20Manual.pdf) for detailed explanations on how to perform the workflow):
+1. Preprocessing the data, e.g. background reduction, evtl. smoothing -> this allows to get an image where the flagellum is best distinguishable (with high contrast) from the background. You may use the ImageJ plugin [SpermQ Preparator](https://github.com/hansenjn/SpermQ_Preparator) to this end; SpermQ Evaluator also allows batch processing allows to let run an entire data set while you do not need the computer, e.g. during the night.
+2. Analyze the preprocessed files with the ImageJ plugin SpermQ. SpermQ can also perform batch processing. Depending on the image resolution and the number of frames per recording it can take some time for each flagellum (3 or 4 min up to one hour). Batch processing allows you to let run an entire data set while you do not need the computer, e.g. during the night.
+3. Convolve data of many flagella (or only one) in [SpermQ Evaluator](https://github.com/IIIImaging/SpermQ_Evaluator) (a pure java tool, does not need imageJ). SpermQ Evaluator produces overview tables and PDF files with plots for each analyzed flagellum.
 
 ### System requirements
 SpermQ consists of ImageJ plugins and a pure java tool. 
