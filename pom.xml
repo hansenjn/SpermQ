@@ -22,8 +22,7 @@
 		<license.projectName>SpermQ_JNH</license.projectName>
  	</properties>
  	
-<!-- Plugin Information -->
- 	<url>https://github.com/hansenjn/</url>
+ 	<url>https://github.com/hansenjn/SpermQ</url>
 	<inceptionYear>2016</inceptionYear>
 	<organization>
 		<name>JNH</name>
@@ -109,15 +108,6 @@
 		<system>None</system>
 	</ciManagement>
  
- 	 <repositories>
-        <!-- NB: for project parent, in case of partial checkout -->
-        <repository>
-            <id>imagej.public</id>
-            <url>http://maven.imagej.net/content/groups/public</url>
-        </repository>
-    </repositories>
- 
-<!-- TODO: See Optional Dependencies section -->
     <dependencies>
         <!-- ImageJ dependencies -->
         <dependency>
