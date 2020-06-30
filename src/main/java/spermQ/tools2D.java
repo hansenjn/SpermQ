@@ -672,8 +672,8 @@ public class tools2D implements Measurements{
 		boolean [] correctFirst = new boolean [traces.size()];
 		correctFirst [0] = false;
 		double stX, stY, eX, eY, ostX, ostY;
-		double [] ostXs = new double [15];
-		double [] ostYs = new double [15];
+		double [] ostXs = new double [(int)(frameDistanceForComparison/2.0)];
+		double [] ostYs = new double [(int)(frameDistanceForComparison/2.0)];
 		int counter;
 		for(int i = 1; i < traces.size(); i++){
 			stX = traces.get(i).getTracePoints().get(0).getX();
@@ -685,7 +685,7 @@ public class tools2D implements Measurements{
 			Arrays.fill(ostXs, Double.POSITIVE_INFINITY);
 			Arrays.fill(ostYs, Double.POSITIVE_INFINITY);
 			counter = 0;
-			for(int j = 1; j < 16 && i-j >=0; j++){
+			for(int j = 1; j < (int)(frameDistanceForComparison/2.0)+1 && i-j >=0; j++){
 				ostXs [j-1] = traces.get(i-j).getTracePoints().get(0).getX();
 				ostYs [j-1]= traces.get(i-j).getTracePoints().get(0).getY();
 				counter ++;
