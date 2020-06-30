@@ -233,9 +233,7 @@ public class tools2D implements Measurements{
 	private static trace2D getTraceBySkeletonization (ImagePlus impIn, int frame, Roi selection, double sigma, String thresholdAlgorithm,
 			double maxRefDist, boolean repeatGauss, boolean blurSelectionOnly, ProgressDialog progress){	
 		ImagePlus impMaxSave = impIn.duplicate();
-		
-		//eventually scale down before thresholding?	TODO
-					
+							
 		//gauss-filter
 			if(blurSelectionOnly){
 				ImagePlus impIn2 = impIn.duplicate();
@@ -333,7 +331,6 @@ public class tools2D implements Measurements{
 			LinkedList<trackPoint2D> unsortedList = new LinkedList<trackPoint2D>();
 							
 			//find end point
-//			trackPoint2D startEnd = null; int startIndex = -1;
 			LinkedList<trackPoint2D> startEnds = new LinkedList <trackPoint2D>();
 			LinkedList<Integer> startIndexes = new LinkedList <Integer>();
 			
@@ -459,54 +456,7 @@ public class tools2D implements Measurements{
 				}				
 			}
 //			progress.notifyMessage("frame " + frame + " best index: " + (bestIndex+1) + " with " + minLeftOverPoints + " left-over points.", ProgressDialog.LOG);
-			nPoints = list.size();
-			
-//			//save unsorted list
-//			for(int i = 0; i < nPoints; i++){
-//				if(i != startIndex){
-//					unsortedList.add(new trackPoint2D(shortestPath[chosenShortestPath].get(i).x*pixelWidth,
-//							shortestPath[chosenShortestPath].get(i).y*pixelHeight));
-//				}					
-//			}
-//			
-//			//create sortedList (list)
-//			{
-//				list.add(startEnd);
-//				
-////				IJ.log(unsortedList.size() + " uls");
-////				IJ.log(list.size() + " ls");
-//				
-//				int index = 0;
-//				double distance;
-//				int pIndex;
-//				sorting: while(!unsortedList.isEmpty()){
-//					distance = Double.POSITIVE_INFINITY; 
-//					p = null;
-//					pIndex = -1;
-//					for(int i = 0; i < unsortedList.size(); i++){
-//						if(getDistance(unsortedList.get(i),list.get(index),NOZ) < distance){
-//							p = unsortedList.get(i);
-//							pIndex = i;
-//							distance = getDistance(unsortedList.get(i),list.get(index),NOZ);
-//						}
-//					}
-//					if(p.equals(null)){
-//						IJ.log("Problem no next point found");
-//					}					
-//					unsortedList.remove(pIndex);
-//					if(Math.sqrt(Math.pow(p.getX()/pixelWidth-list.get(index).getX()/pixelWidth,2.0)+
-//							Math.pow(p.getY()/pixelHeight-list.get(index).getY()/pixelHeight,2.0)) > constants.sqrt2){
-//						progress.notifyMessage("frame " + frame + ": " + unsortedList.size() + " points discarded. X " + p.getX()/pixelWidth 
-//								+ " _ " + list.get(index).getX()/pixelWidth
-//								+ " Y " + p.getY()/pixelHeight + " _ " + list.get(index).getY()/pixelHeight, ProgressDialog.NOTIFICATION);
-//						break sorting;
-//					}else{
-//						list.add(p);
-//						index++;
-//					}					
-//				}
-//			}
-//			list.trimToSize();				
+			nPoints = list.size();			
 			
 			//get statistics for first point				
 				OvalRoi roi0 = new OvalRoi((int)Math.round(list.get(0).getX()/pixelWidth) - 8,
@@ -527,37 +477,18 @@ public class tools2D implements Measurements{
 			//close images
 				impMaxSave.changes = false;
 				impMaxSave.close();
-//				impMaxSaveThresholded.changes = false;
-//				impMaxSaveThresholded.close();
 				impIn.changes = false;
 				impIn.close();
 				
 			//if first point is actually last point reverse list
 			ArrayList <trackPoint2D> newList = new ArrayList <trackPoint2D>(nPoints);
-			if(intensity0 < intensityE){
-				//add center of mass point of head (only if not equal to first skeletal point)
-//				if(list.get(nPoints-1).getX() == COME [0] && list.get(nPoints-1).getY() == COME [1]){
-//					IJ.log("first point = COME");
-//				}
-//				else if(addCOM){
-//					newList.ensureCapacity(nPoints+1);
-//					newList.add(new trackPoint2D(COME [0], COME [1]));
-//				}				
-								
+			if(intensity0 < intensityE){								
 				//invert list
 				for(int i = nPoints-1; i >= 0; i--){	
 					newList.add(list.get(i));	
 				}					
 			}else{				
-				//add center of mass point of head (only if not equal to first skeletal point)
-//				if(list.get(0).getX() == COM0 [0] && list.get(0).getY() == COM0 [1]){
-//					IJ.log("first point = COM0");
-//				}
-//				else if(addCOM){
-//					newList.ensureCapacity(nPoints+1);
-//					newList.add(new trackPoint2D(COM0 [0], COM0 [1]));
-//				}
-								
+				//just copy list		
 				for(int i = 0; i < nPoints; i++){	
 					newList.add(list.get(i));	
 				}
