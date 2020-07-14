@@ -47,7 +47,7 @@ The ImageJ plugins and Java software were developed and tested on Windows 8.1, W
 ImageJ and Java is also available for Linux, where the ImageJ plugins and Java software in theory can be easily run, too.
 
 ### How to report errors and issues
-Please report errors or other issues regarding the SpermQ software using the [issue system](https://github.com/hansenjn/SpermQ/issues) or via e-mail to jan.hansen(at)uni-bonn.de.
+Please report errors or other issues regarding the SpermQ software using the [issue system](https://github.com/hansenjn/SpermQ/issues) or via e-mail to jan.hansen ( at ) uni-bonn.de.
 
 ## Important LICENSE note
 The newly developed software is licensed under GNU General Public License v3.0. However, this software includes packages derived from others, for which different licenses may apply. The different licenses and the authors of theses code parts are clearly stated in the headers of the respective classes. This applies to the following packages\classes:
