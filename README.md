@@ -55,7 +55,7 @@ The newly developed software is licensed under GNU General Public License v3.0. 
 - AnalyzeSkeleton & Skeletonize3D (GNU General Public License, http://www.gnu.org/licenses/gpl.txt, author: Ignacio Arganda-Carreras)
 
 ## Publications presenting an analysis of flagella / motile cilia beating based on SpermQ
-- Olstad, E.W., Ringers, C., et al. **2020**. Ciliary Beating Compartmentalizes Cerebrospinal Fluid Flow in the Brain and Regulates Ventricular Development.
+- Olstad, E.W., Ringers, C., et al. **2019**. Ciliary Beating Compartmentalizes Cerebrospinal Fluid Flow in the Brain and Regulates Ventricular Development.
 *Current Biology*. Volume 29, Issue 2, Pages 229-241.e6, ISSN 0960-9822, https://doi.org/10.1016/j.cub.2018.11.059. (http://www.sciencedirect.com/science/article/pii/S0960982218315896)
 - Raju, D.N., Hansen, J.N., Rassmann, S., et al. **2019**. Cyclic Nucleotide-Specific Optogenetics Highlights Compartmentalization of the Sperm Flagellum into cAMP Microdomains. *Cells*. 8, 648. https://doi.org/10.3390/cells8070648. (https://www.mdpi.com/2073-4409/8/7/648)
 - Striggow, F., Medina‐Sánchez, M., et al. **2020**. Sperm‐Driven Micromotors Moving in Oviduct Fluid and Viscoelastic Media. *Small*. 16, 2000213. https://doi.org/10.1002/smll.202000213. (https://onlinelibrary.wiley.com/doi/full/10.1002/smll.202000213)
