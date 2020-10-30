@@ -1,6 +1,6 @@
 /***===============================================================================
  
- SpermQ_.java Version 20190926
+ SpermQ_.java
  
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License
@@ -33,7 +33,6 @@ import ij.gui.PolygonRoi;
 import ij.gui.Roi;
 import ij.gui.WaitForUserDialog;
 import ij.process.*;
-import ij.process.AutoThresholder.Method;
 import ij.text.TextPanel;
 import ij.measure.*;
 import ij.plugin.frame.RoiManager;
@@ -41,6 +40,7 @@ import spermQ.edu.emory.mathcs.jtransforms.fft.*;
 import spermQ.jnh.support.*;
 import spermQ.skeleton_analysis.*;
 import spermQ.skeletonize3D.Skeletonize3D_;
+
 public class tools2D implements Measurements{
 	//encodings
 	public static final int NOZ = 0,
@@ -1744,6 +1744,136 @@ public class tools2D implements Measurements{
 			case KYMOTANGENTANGLE: return Math.toDegrees(tools.get2DAngle(p.getVector(), constants.X_AXIS));
 			default: return 0.0;
 		}
+	}
+	
+	public static void saveXYCoordinates(ArrayList<trace2D> traces, double calibration, String path, ProgressDialog progress){
+		//get arc min max and tmax
+//			double arcLengthMin = Double.POSITIVE_INFINITY;
+			double arcLengthMax = Double.NEGATIVE_INFINITY;
+			int	tMax = 0;
+			progress.notifyMessage("Create XY Coordinate lists: nr of timepoints to save: " + traces.size(), ProgressDialog.LOG);
+			for(int i = 0; i < traces.size(); i++){
+//				if(!traces.get(i).oriented)	continue;
+				if(traces.get(i).getTracePoints().size() <= 0){
+					progress.notifyMessage("Create XY Coordinate lists: trace " + i + " harbors 0 points", ProgressDialog.LOG);
+					continue;	
+				}
+				if(traces.get(i).getFrame() > tMax){
+					tMax = traces.get(i).getFrame();
+				}
+				
+				for(int j = 0; j < traces.get(i).getTracePoints().size(); j++){
+					if(traces.get(i).getTracePoints().get(j).getArcLengthPos() > arcLengthMax){
+						arcLengthMax = traces.get(i).getTracePoints().get(j).getArcLengthPos();
+					}
+//					if(traces.get(i).getTracePoints().get(j).getArcLengthPos() < arcLengthMin){
+//						arcLengthMin = traces.get(i).getTracePoints().get(j).getArcLengthPos();
+//					}					
+				}
+			}			
+			
+			progress.notifyMessage("Create XY Coordinate lists: arc length maximum: " + constants.dfdialog.format(arcLengthMax), ProgressDialog.LOG);
+			
+		//save all
+			double values [][] = new double [(int)Math.round(arcLengthMax / calibration)+1][2];
+			TextPanel tp = new TextPanel("Results");
+			String appText = "";
+			//save X
+			{
+				tp.clear();
+				tp.append("time	arc length (micron)");
+			  	appText = "";
+			  	for(int a = 0; a < (int)Math.round(arcLengthMax / calibration)+1; a++){
+			  		appText += "	" + constants.df3US.format(a*calibration);
+			  	}
+			  	tp.append(appText);
+			  	
+			  	for(int i = 0; i < traces.size(); i++){
+			  		appText = "" + i;
+					if(traces.get(i).getTracePoints().size() <= 0){		//!traces.get(i).oriented || 
+						tp.append(appText);
+						continue;	
+					}
+					// && Double.isNaN(traces.get(i).getThetaDegree(encoding))==false
+					
+					for(int a = 0; a < (int)Math.round(arcLengthMax / calibration)+1; a++){
+						values [a][0] = 0.0;
+						values [a][1] = 0.0;
+					}
+					
+					for(int j = 0; j < traces.get(i).getTracePoints().size(); j++){
+						try{
+							values[(int)Math.round(traces.get(i).getTracePoints().get(j).getArcLengthPos() / calibration)][0]
+									+= traces.get(i).getTracePoints().get(j).getX();
+							values[(int)Math.round(traces.get(i).getTracePoints().get(j).getArcLengthPos() / calibration)][1] += 1.0;											
+						}catch (Exception e){
+							IJ.log("T" + i + ": problem in kymograph generation..." + " j" + j + " - " 
+									+ (int)Math.round(traces.get(i).getTracePoints().get(j).getArcLengthPos() / calibration) + " length " + values.length);
+						}
+					}	
+					
+					for(int a = 0; a < (int)Math.round(arcLengthMax / calibration)+1; a++){
+//								IJ.log("j " + j + " i " + i + "xyz" + xyz + " enc " + encoding);
+//								IJ.log("al " + points.get(j).getArcLengthPos());
+//								IJ.log("al " + (int)Math.round(points.get(j).getArcLengthPos() * resolution));
+//								IJ.log("corrI " + getCorrectedIntensity8bit (points.get(j).getOrientedVector(encoding)[xyz], min, max));					
+						appText += "	";
+						if(values[a][1]>0.0){
+							appText += constants.df6US.format(values[a][0]/values[a][1]);
+						}						
+					}
+					tp.append(appText);
+				}
+			  	tools2D.addFooter(tp);		
+			  	tp.saveAs(path + "_coordX.txt");
+			}
+			
+			//save Y
+			{
+				tp.clear();
+				tp.append("time	arc length (micron)");
+			  	appText = "";
+			  	for(int a = 0; a < (int)Math.round(arcLengthMax / calibration)+1; a++){
+			  		appText += "	" + constants.df3US.format(a*calibration);
+			  	}
+			  	tp.append(appText);
+			  				  	
+			  	for(int i = 0; i < traces.size(); i++){
+			  		appText = "" + i;
+			  		if(traces.get(i).getTracePoints().size() <= 0){		//!traces.get(i).oriented || 
+						tp.append(appText);
+						continue;	
+					}
+					// && Double.isNaN(traces.get(i).getThetaDegree(encoding))==false
+					
+					for(int a = 0; a < (int)Math.round(arcLengthMax / calibration)+1; a++){
+						values [a][0] = 0.0;
+						values [a][1] = 0.0;
+					}
+					
+					for(int j = 0; j < traces.get(i).getTracePoints().size(); j++){
+						try{
+							values[(int)Math.round(traces.get(i).getTracePoints().get(j).getArcLengthPos() / calibration)][0]
+									+= traces.get(i).getTracePoints().get(j).getY();
+							values[(int)Math.round(traces.get(i).getTracePoints().get(j).getArcLengthPos() / calibration)][1] += 1.0;											
+						}catch (Exception e){
+							IJ.log("T" + i + ": problem in kymograph generation..." + " j" + j + " - " 
+									+ (int)Math.round(traces.get(i).getTracePoints().get(j).getArcLengthPos() / calibration) + " length " + values.length);
+						}
+					}	
+					
+					for(int a = 0; a < (int)Math.round(arcLengthMax / calibration)+1; a++){					
+						appText += "	";
+						if(values[a][1]>0.0){
+							appText += constants.df6US.format(values[a][0]/values[a][1]);
+						}
+					}
+					tp.append(appText);							
+				}
+			  	tools2D.addFooter(tp);		
+			  	tp.saveAs(path + "_coordY.txt");
+			}
+					  	
 	}
 	
 	public static void saveOrientedKymographAsText(ArrayList<trace2D> traces, double calibration, String path, int encoding, int kymoType, int excludeHeadPoints){

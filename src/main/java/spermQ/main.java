@@ -1,6 +1,6 @@
 /***===============================================================================
  
- SpermQ_.java Version v0.2.1
+ SpermQ_.java Version v0.2.2
 
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License
@@ -39,7 +39,7 @@ import spermQ.jnh.support.*;
 public class main implements PlugIn, Measurements{
 	//Name
 		static final String PLUGINNAME = "SpermQ_";
-		static final String PLUGINVERSION = "v0.2.1";
+		static final String PLUGINVERSION = "v0.2.2";
 		static final double threshold = 0.70;
 		
 	//default settings loader
@@ -1012,7 +1012,7 @@ public class main implements PlugIn, Measurements{
 				  		System.gc();
 //				  		tools2D.saveOrientedKymograph(traces, xyCal, savePath, tools2D.NOZ, tools2D.KYMOTANGENTANGLE, 0);
 				  		tools2D.saveOrientedKymographAsText(traces, xyCal, savePath, tools2D.NOZ, tools2D.KYMOTANGENTANGLE, 0);
-				  		System.gc();
+				  		System.gc();				  		
 				  					  		
 				  		progress.updateBarText("save kymographs and images z ...");
 				  		
@@ -1026,6 +1026,11 @@ public class main implements PlugIn, Measurements{
 				  		System.gc();
 				  		
 				  		tools2D.saveOrientedTraceImage(imp, traces, encoding, savePath, xyCal);
+				  		System.gc();
+				  		
+				  		progress.updateBarText("save xy coordinates ...");
+				  		
+				  		tools2D.saveXYCoordinates(traces, xyCal, savePath, progress);
 				  		System.gc();
 				  		
 					//save progress dialog log file
