@@ -55,6 +55,7 @@ The newly developed software is licensed under GNU General Public License v3.0. 
 - AnalyzeSkeleton & Skeletonize3D (GNU General Public License, http://www.gnu.org/licenses/gpl.txt, author: Ignacio Arganda-Carreras)
 
 ## Publications presenting an analysis of flagella / motile cilia beating based on SpermQ
+- Son J.H., Weiss B.L., et al. **2021**. Infection with endosymbiotic Spiroplasma disrupts tsetse (Glossina fuscipes fuscipes) metabolic and reproductive homeostasis. *PLOS Pathogens* 17(9): e1009539. https://doi.org/10.1371/journal.ppat.1009539
 - Striggow, F., Nadporozhskaia, L., Friedrich, B.M. et al. **2021**. Micromotor-mediated sperm constrictions for improved swimming performance. *Eur. Phys. J. E* 44, 67. https://doi.org/10.1140/epje/s10189-021-00050-9
 - Gadadhar, S., Viar, G.A., et al. **2021**. Tubulin glycylation controls axonemal dynein activity, flagellar beat, and male fertility. *Science*. 371:eabd4914. https://doi.org/10.1126/science.abd4914 (https://science.sciencemag.org/content/371/6525/eabd4914.full)
 - Balbach, M., Hamzeh, H., et al. **2020**. Molecular Mechanism Underlying the Action of Zona-pellucida Glycoproteins on Mouse Sperm. *Frontiers in Cell and Developmental Biology*. 8:572735. https://doi.org/10.3389/fcell.2020.572735. (https://www.frontiersin.org/articles/10.3389/fcell.2020.572735/full)
