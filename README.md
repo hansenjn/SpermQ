@@ -56,6 +56,7 @@ The newly developed software is licensed under GNU General Public License v3.0. 
 
 ## Publications presenting an analysis of flagella / motile cilia beating based on SpermQ
 - Gadadhar, S., Viar, G.A., et al. **2021**. Tubulin glycylation controls axonemal dynein activity, flagellar beat, and male fertility. *Science*. 371:eabd4914. https://doi.org/10.1126/science.abd4914 (https://science.sciencemag.org/content/371/6525/eabd4914.full)
+- Hansen, J.N., et al. **2021**. Multifocal imaging for precise, label-free tracking of fast biological processes in 3D. *Nat. Commun.* 12:4574. https://dx.doi.org/10.1038/s41467-021-24768-4.
 - Balbach, M., Ghanem, L., et al. **2021**. Soluble adenylyl cyclase inhibition prevents human sperm functions essential for fertilization. *Molecular Human Reproduction*. gaab054. https://doi.org/10.1093/molehr/gaab054
 - Striggow, F., Nadporozhskaia, L., Friedrich, B.M. et al. **2021**. Micromotor-mediated sperm constrictions for improved swimming performance. *Eur. Phys. J. E* 44, 67. https://doi.org/10.1140/epje/s10189-021-00050-9
 - Son J.H., Weiss B.L., et al. **2021**. Infection with endosymbiotic *Spiroplasma* disrupts tsetse (*Glossina fuscipes fuscipes*) metabolic and reproductive homeostasis. *PLOS Pathogens* 17(9): e1009539. https://doi.org/10.1371/journal.ppat.1009539
