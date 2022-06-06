@@ -1876,8 +1876,7 @@ public class tools2D implements Measurements{
 					  	
 	}
 	
-	public static void saveOrientedKymographAsText(ArrayList<trace2D> traces, double calibration, String path, int encoding, int kymoType, int excludeHeadPoints){
-		double min = getKymographMin(kymoType), max = getKymographMax(kymoType);		
+	public static void saveOrientedKymographAsText(ArrayList<trace2D> traces, double calibration, String path, int encoding, int kymoType, int excludeHeadPoints){		
 		String xyzText = getKymographTxtLabel(kymoType);		
 		String ending = "_k" + xyzText;
 		if((kymoType == KYMOZ || kymoType == KYMODZ)  && encoding==MEDIANZ){
