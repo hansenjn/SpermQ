@@ -1,6 +1,6 @@
 /***===============================================================================
  
- SpermQ_.java Version v0.2.2
+ SpermQ_.java Version v0.2.3
 
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  
  See the GNU General Public License for more details.
  
- Copyright (C) 2016 - 2020: Jan N Hansen and Jan F Jikeli
+ Copyright (C) 2016 - 2022: Jan N Hansen and Jan F Jikeli
    
  For any questions please feel free to contact me (jan.hansen@uni-bonn.de).
 
@@ -39,7 +39,7 @@ import spermQ.jnh.support.*;
 public class main implements PlugIn, Measurements{
 	//Name
 		static final String PLUGINNAME = "SpermQ_";
-		static final String PLUGINVERSION = "v0.2.2";
+		static final String PLUGINVERSION = "v0.2.3";
 		static final double threshold = 0.70;
 		
 	//default settings loader

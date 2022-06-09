@@ -13,7 +13,7 @@
  
  See the GNU General Public License for more details.
  
- Copyright (C) 2016 - 2019: Jan N Hansen and Jan F Jikeli
+ Copyright (C) 2016 - 2022: Jan N Hansen and Jan F Jikeli
    
  For any questions please feel free to contact me (jan.hansen@uni-bonn.de).
 
@@ -1457,18 +1457,39 @@ public class tools2D implements Measurements{
 	
 	public static void saveOrientedTraceImage(ImagePlus imp, ArrayList<trace2D> traces, int encoding, String path, double calibration){
 		String ending = "";
-		
+		double applKyMinX = KYMIN_X;
+		double applKyMinY = KYMIN_Y;
+		double applKyMaxX = KYMAX_X;
+		double applKyMaxY = KYMAX_Y;
+				
 		//get min / max values
 		int	tMax = 0;
+		
 		for(int i = 0; i < traces.size(); i++){			
 			if(!(traces.get(i).getTracePoints().size() > 0)) continue;
 			if(!traces.get(i).oriented)	continue;			
 			if(traces.get(i).getFrame() > tMax)	tMax = traces.get(i).getFrame();
+		
+			for(int j = 0; j < traces.get(i).getTracePoints().size(); j++){
+				if(traces.get(i).getTracePoints().get(j).get2DOrientedVector()[0] < applKyMinX) applKyMinX = traces.get(i).getTracePoints().get(j).get2DOrientedVector()[0];
+				if(traces.get(i).getTracePoints().get(j).get2DOrientedVector()[0] > applKyMaxX) applKyMaxX = traces.get(i).getTracePoints().get(j).get2DOrientedVector()[0];
+				if(traces.get(i).getTracePoints().get(j).get2DOrientedVector()[1] < applKyMinY) applKyMinY = traces.get(i).getTracePoints().get(j).get2DOrientedVector()[1];
+				if(traces.get(i).getTracePoints().get(j).get2DOrientedVector()[1] > applKyMaxY) applKyMaxY = traces.get(i).getTracePoints().get(j).get2DOrientedVector()[1];
+			}
 		}
 		
+		if(applKyMinX < KYMIN_X)	applKyMinX -= 5;
+		if(applKyMinY < KYMIN_Y)	applKyMinY -= 5;
+		if(applKyMaxX > KYMAX_X)	applKyMaxX += 5;
+		if(applKyMaxY > KYMAX_Y)	applKyMaxY += 5;
+		
 		//initialize image and array
-		int width = (int)Math.round((KYMAX_X - KYMIN_X)/calibration) + 1,
-			height = (int)Math.round((KYMAX_Y - KYMIN_Y)/calibration) + 1;
+		int width = (int)Math.round((applKyMaxX - applKyMinX)/calibration) + 1,
+			height = (int)Math.round((applKyMaxY - applKyMinY)/calibration) + 1;
+		
+//		IJ.log("minx" + applKyMinX + "maxx" + applKyMaxX + " width" + width);
+//		IJ.log("miny" + applKyMinY + "maxy" + applKyMaxY + " width" + height);
+//		IJ.log("k" + KYMIN_X + "/" + KYMAX_X + "/" + KYMIN_Y + "/" + KYMAX_Y);
 		
 		ImagePlus traceImp = IJ.createImage("Ori Image", width, height, tMax+1, 8);
 		traceImp.setCalibration(imp.getCalibration());
@@ -1501,8 +1522,8 @@ public class tools2D implements Measurements{
 				for(int j = 0; j < traces.get(i).getTracePoints().size(); j++){
 					intensity = tools.getEncodedIntensity8bit(traces.get(i).getTracePoints().get(j).getZ(encoding),KYMIN_Z,KYMAX_Z);
 					if(traces.get(i).getTracePoints().get(j).getZ(encoding) == 0.0)	intensity = 255.0;
-					cx = (int)Math.round((traces.get(i).getTracePoints().get(j).get2DOrientedVector()[0]-KYMIN_X)/calibration);
-					cy = (int)Math.round((traces.get(i).getTracePoints().get(j).get2DOrientedVector()[1]-KYMIN_Y)/calibration);
+					cx = (int)Math.round((traces.get(i).getTracePoints().get(j).get2DOrientedVector()[0]-applKyMinX)/calibration);
+					cy = (int)Math.round((traces.get(i).getTracePoints().get(j).get2DOrientedVector()[1]-applKyMinY)/calibration);
 					if(cx >= 0 && cx < saveImage.length && cy >= 0 && cy < saveImage[0].length){
 						saveImage [cx][cy][0] += intensity;
 						saveImage [cx][cy][1] += 1.0;
@@ -1884,9 +1905,6 @@ public class tools2D implements Measurements{
 		}else if((kymoType == KYMOZ || kymoType == KYMODZ) && encoding==MEANZ){
 			ending += "mean";
 		}
-		
-		//TODO test function
-//		if(min == 0.0 && max == 0.0)	IJ.log("minmax0 at kymoType" + kymoType);
 		
 		//get arc min max and tmax
 			double arcLengthMin = Double.POSITIVE_INFINITY,

@@ -10,7 +10,7 @@
 	</parent> 
  
     <artifactId>SpermQ_</artifactId>
-    <version>0.2.2-SNAPSHOT</version>
+    <version>0.2.3-SNAPSHOT</version>
  	<groupId>JNH</groupId>
  	<description>An ImageJ plugin to analyze the flagellar beat of sperm and sperm steering. Copyright (C) 2017-2020: Jan N. Hansen, Sebastian Rassmann, Jan F. Jikeli, and Dagmar Wachten; research group Biophysical Imaging, Institute of Innate Immunity, Bonn, Germany (http://www.iii.uni-bonn.de/en/wachten_lab/). Funding: DFG priority program SPP 1726 &quot;Microswimmers&quot;. This software is part of the following publication: https://www.mdpi.com/2073-4409/8/1/10.</description>
  	
