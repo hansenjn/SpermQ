@@ -1,6 +1,6 @@
 /***===============================================================================
  
- SpermQ_.java Version v0.2.3
+ SpermQ_.java Version v0.2.4
 
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  
  See the GNU General Public License for more details.
  
- Copyright (C) 2016 - 2022: Jan N Hansen and Jan F Jikeli
+ Copyright (C) 2016 - 2023: Jan N Hansen and Jan F Jikeli
    
  For any questions please feel free to contact me (jan.hansen@uni-bonn.de).
 
@@ -39,7 +39,7 @@ import spermQ.jnh.support.*;
 public class main implements PlugIn, Measurements{
 	//Name
 		static final String PLUGINNAME = "SpermQ_";
-		static final String PLUGINVERSION = "v0.2.3";
+		static final String PLUGINVERSION = "v0.2.4";
 		static final double threshold = 0.70;
 		
 	//default settings loader
@@ -98,6 +98,12 @@ public class main implements PlugIn, Measurements{
 		
 	@Override
 	public void run(String arg) {
+		// Initialize home path
+		String homePath = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath();
+		if(System.getProperty("os.name").toUpperCase().contains("MAC")){
+			homePath += System.getProperty("file.separator") + "Desktop";
+		}
+		
 		/**&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 		Load Default Settings
 		&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
@@ -395,6 +401,11 @@ public class main implements PlugIn, Measurements{
 			gd.setInsets(0,0,0);	gd.addNumericField("FFT: Grouped consecutive time-steps", groupedTimesteps, 0);
 			gd.setInsets(0,0,0);	gd.addNumericField("FFT: Do not analyze initial ... µm from head", neglectedInitialArclength, 0);
 			gd.setInsets(0,0,0);	gd.addNumericField("Head rotation matrix radius", hrPlusMinusRange, 0);
+
+			gd.setInsets(10,0,0);	gd.addMessage("Output of summary file", constants.BoldTxt);
+			gd.setInsets(-3,0,0);		gd.addMessage("In the field below you may, if needed, adapt the file path where the file summarizing results for all analyzed images will be stored.", constants.PlTxt);
+			gd.setInsets(-3,0,0);		gd.addStringField("File path for output of the summary txt-file: ", homePath, 30);
+			
 			
 			gd.showDialog();
 		
@@ -424,6 +435,7 @@ public class main implements PlugIn, Measurements{
 			groupedTimesteps = (int) gd.getNextNumber();
 			neglectedInitialArclength = (double) gd.getNextNumber();			
 			hrPlusMinusRange = (int) hrPlusMinusRange;
+		 	homePath = gd.getNextString();
 			
 			if (gd.wasCanceled())return;
 		}
@@ -499,11 +511,32 @@ public class main implements PlugIn, Measurements{
 		&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 		
 		//Initialize
-		ImagePlus imp;		
-		String homePath = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath();
-		if(System.getProperty("os.name").toUpperCase().contains("MAC")){
-			homePath += System.getProperty("file.separator") + "Desktop";
+		ImagePlus imp;
+		
+		//Checking for existing saving path for the summary
+		if(!new File(homePath).exists()) {
+			while(true) {
+				GenericDialog gd = new GenericDialog(PLUGINNAME);		
+//				setInsets(top, left, bottom)
+				gd.setInsets(0,0,0);	gd.addMessage(PLUGINNAME + ", version " + PLUGINVERSION + " (\u00a9 2013-" + constants.dateY.format(new Date()) + ", JF Jikeli \u0026 JN Hansen)", constants.Head1);
+						
+				gd.setInsets(10,0,0);	gd.addMessage("The path for saving the summary file does not exist.", constants.PlTxt);
+				gd.setInsets(0,0,0);	gd.addMessage("Correct the path in the box below or enter an existing path for storing the summary file.", constants.PlTxt);
+				
+				gd.setInsets(10,0,0);	gd.addStringField("File path for saving the summary file: ", homePath, 30);
+				
+				gd.showDialog();
+			
+			 	homePath = gd.getNextString();
+				
+				if (gd.wasCanceled()) return;
+				
+				if(new File(homePath).exists()) {
+					break;
+				}
+			}
 		}
+		
 		
 		//get head selections
 		Roi [] selections = new Roi [tasks];
@@ -977,8 +1010,16 @@ public class main implements PlugIn, Measurements{
 							+ "	" + constants.df6US.format(freqSummaryCAngle [task][2][2]));
 					
 						
-						tools2D.addFooter(tp);		
-					  	tp.saveAs(dir [task] + saveName + System.getProperty("file.separator") + "results.txt");
+						tools2D.addFooter(tp);
+						try {
+						  	tp.saveAs(dir [task] + saveName + System.getProperty("file.separator") + "results.txt");							
+						}catch(Exception e) {
+							String out = "";
+							for(int err = 0; err < e.getStackTrace().length; err++){
+								out += " \n " + e.getStackTrace()[err].toString();
+							}
+							progress.notifyMessage("Failed to write the file path " + dir [task] + saveName + System.getProperty("file.separator") + "results.txt" + " .\nAn error occured:\n" + out, ProgressDialog.ERROR);
+						}
 					  	
 					//save selection
 					  	rm = RoiManager.getInstance();
@@ -1314,10 +1355,20 @@ public class main implements PlugIn, Measurements{
 				}	
 			}				
 			tools2D.addFooter(tp);
-			tp.saveAs(homePath + System.getProperty("file.separator") + "SpermQ_Summary_" + constants.dateName.format(new Date()) + ".txt");
+			
+			try {
+				tp.saveAs(homePath + System.getProperty("file.separator") + "SpermQ_Summary_" + constants.dateName.format(new Date()) + ".txt");					
+			}catch(Exception e) {
+				String out = "";
+				for(int err = 0; err < e.getStackTrace().length; err++){
+					out += " \n " + e.getStackTrace()[err].toString();
+				}
+				progress.notifyMessage("Failed to save the file " + homePath + System.getProperty("file.separator") + "SpermQ_Summary_" + constants.dateName.format(new Date()) + ".txt " + " due to an error:\n" + out, ProgressDialog.ERROR);
+			}
+			
 			System.gc();
 			done = true;
-			new WaitForUserDialog("All tasks have been processed. A summary file has been saved on the desktop!").show();
+			new WaitForUserDialog("All tasks have been processed. A summary file has been saved at\n" + homePath + "!").show();
 		}		
 	}
 }
